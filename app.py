@@ -59,6 +59,25 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
+# Authentication (Optional Login Portal)
+# ---------------------------------------------------------------------------
+if hasattr(st, "secrets") and "APP_PASSWORD" in st.secrets:
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+        
+    if not st.session_state.authenticated:
+        st.title("🔒 Login Required")
+        st.markdown("This dashboard is password protected.")
+        pwd = st.text_input("Enter Dashboard Password", type="password")
+        if st.button("Login"):
+            if pwd == str(st.secrets["APP_PASSWORD"]):
+                st.session_state.authenticated = True
+                st.rerun()
+            else:
+                st.error("Incorrect password")
+        st.stop()
+
+# ---------------------------------------------------------------------------
 # Custom CSS for a clean professional look
 # ---------------------------------------------------------------------------
 st.markdown("""
