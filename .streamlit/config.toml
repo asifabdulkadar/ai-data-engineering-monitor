@@ -1,0 +1,14 @@
+# Streamlit configuration for cloud deployment.
+# This file is NOT used for secrets — use Streamlit secrets management instead.
+
+[theme]
+primaryColor = "#4A90D9"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F8F9FA"
+textColor = "#333333"
+font = "sans serif"
+
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = true

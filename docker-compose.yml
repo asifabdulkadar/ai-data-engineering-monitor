@@ -1,0 +1,45 @@
+# ==============================================================
+# docker-compose.yml — Local development with PostgreSQL
+# ==============================================================
+# Usage: docker compose up -d
+# This provides a local PostgreSQL instance for development.
+# For production, use Supabase PostgreSQL instead.
+# ==============================================================
+
+services:
+  # Local PostgreSQL database
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai_monitor
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Application (Streamlit dashboard)
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    environment:
+      # Override DATABASE_URL to point to the local Postgres container
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/ai_monitor
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data  # Mount data directory for CSV access
+
+volumes:
+  pgdata:
