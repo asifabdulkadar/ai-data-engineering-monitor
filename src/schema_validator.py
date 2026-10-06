@@ -21,27 +21,27 @@ logger = get_logger(__name__)
 
 # Expected schema: column_name → expected pandas dtype category
 EXPECTED_SCHEMA: dict[str, str] = {
-    "customerid":       "object",
-    "gender":           "object",
-    "seniorcitizen":    "int",        # 0 or 1
-    "partner":          "object",
-    "dependents":       "object",
-    "tenure":           "int",
-    "phoneservice":     "object",
-    "multiplelines":    "object",
-    "internetservice":  "object",
-    "onlinesecurity":   "object",
-    "onlinebackup":     "object",
-    "deviceprotection": "object",
-    "techsupport":      "object",
-    "streamingtv":      "object",
-    "streamingmovies":  "object",
-    "contract":         "object",
-    "paperlessbilling": "object",
-    "paymentmethod":    "object",
-    "monthlycharges":   "float",
-    "totalcharges":     "float",
-    "churn":            "object",
+    "customer_id":       "object",
+    "gender":            "object",
+    "senior_citizen":    "int",        # 0 or 1
+    "partner":           "object",
+    "dependents":        "object",
+    "tenure":            "int",
+    "phone_service":     "object",
+    "multiple_lines":    "object",
+    "internet_service":  "object",
+    "online_security":   "object",
+    "online_backup":     "object",
+    "device_protection": "object",
+    "tech_support":      "object",
+    "streaming_tv":      "object",
+    "streaming_movies":  "object",
+    "contract":          "object",
+    "paperless_billing": "object",
+    "payment_method":    "object",
+    "monthly_charges":   "float",
+    "total_charges":     "float",
+    "churn":             "object",
 }
 
 

@@ -182,13 +182,13 @@ def run_etl(
         df = _normalize_categories(df)
         df = _transform_types(df)
 
+        df = _rename_for_db(df)
+        
         # --- VALIDATE ---
         schema_result = validate_schema(df)
         result["schema_result"] = schema_result
         if schema_result["status"] == "FAIL":
             raise ValueError(f"Schema validation failed: {schema_result['message']}")
-
-        df = _rename_for_db(df)
 
         result["rows_rejected"] = rejected
         result["rows_processed"] = len(df)
